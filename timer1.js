@@ -1,8 +1,14 @@
-(function countdownTimer() {
+const countdownTimer = function() {
   const seconds = process.argv.slice(2).map(Number);
-  for (let i = 0; i < seconds.length; i++) {
+  for (const second of seconds) {
+    if (second < 0 && isNaN(second)) {
+      continue;
+    }
+
     setTimeout(() => {
       process.stdout.write('\x07');
-    }, seconds[i] * 1000);
+    }, second * 1000);
   }
-}());
+};
+
+countdownTimer();
